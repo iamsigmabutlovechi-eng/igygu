@@ -1,42 +1,29 @@
 # THE ASHEN CROWN
 
-**Development target:** Unreal Engine 5.8 · source version 0.8.1  
-**Legacy playable baseline:** Web/Three.js 0.7.1
+This repository is the GitHub workspace for **THE ASHEN CROWN**.
 
-A fantasy RPG project about restoring a fallen capital and rebuilding a kingdom.
+## Current handoff
 
-## Source bundle
+The full Unreal Engine 5.8 migration project and retained web-game source are delivered separately in the source archive attached to the project handoff:
 
-The complete source project, including the Unreal C++ migration, the preserved browser-game implementation, game data, tests, scripts and Vietnamese documentation, is stored at:
+`THE_ASHEN_CROWN_UNREAL_5_8_0.8.1_SAVE_HARDENING.zip`
 
-`releases/THE_ASHEN_CROWN_UNREAL_5_8_0.8.1_SAVE_HARDENING.zip`
+The archive contains the complete project tree. Extract it before opening Unreal Editor. Its top-level directory is `THE_ASHEN_CROWN_UNREAL_5_8/`.
 
-Extract the archive before opening the project. Its top-level directory is `THE_ASHEN_CROWN_UNREAL_5_8/`.
+> The complete source tree has not yet been mirrored into this GitHub repository. The repository currently contains this project overview. Do not treat the presence of this README as evidence that the Unreal source has been pushed.
 
-## Unreal Engine project
+## Project target
 
-- 8 × 8 km procedural terrain blockout and 16 imported region records.
-- Third-person movement and camera.
-- Nine restorable city districts with adjacency unlocks, staged costs and daily yields.
-- Procedural placeholder buildings and scheduled citizen prototypes.
-- SaveGame schema v2, validated legacy JSON importer, bounded resources/player coordinates, and protection against overwriting undecodable or newer-version saves.
-- Campaign data retained for factions, characters, recruitable heroes, hidden questlines and endings.
+- Unreal Engine 5.8 C++ migration vertical slice.
+- Legacy browser game version 0.7.1 retained as the reference implementation.
+- 16 world regions, nine restorable city districts, third-person movement, procedural NPC prototype, and campaign data.
+- SaveGame schema v2 with legacy-save validation and safer save-slot handling.
 
-## Run source validation
+## Validation performed on the delivered source archive
 
-After extracting the bundle:
+- Unreal source validator: **54 PASS / 0 FAIL**.
+- Python migration/validation script syntax: PASS.
+- Legacy web source `npm run check`: PASS.
+- Legacy web source `npm test`: PASS.
 
-```bash
-cd THE_ASHEN_CROWN_UNREAL_5_8
-python Scripts/validate_project.py
-python -m py_compile Scripts/Create_StartupMap.py Scripts/validate_project.py
-cd LegacyWebSource
-npm run check
-npm test
-```
-
-A GitHub Actions workflow runs the same source-level checks against the bundle. These checks do not replace UnrealHeaderTool/MSVC compilation, Play-In-Editor testing, cooking or Windows packaging. No Unreal `.exe` is included or claimed as built.
-
-## Build
-
-Install Unreal Engine 5.8.x and the matching C++ toolchain, open `AshenCrown.uproject`, then follow `README_VI.md` in the source bundle to generate the World Partition map and package a Windows Development build.
+These are source-level checks only. UnrealHeaderTool/MSVC compilation, Play-In-Editor validation, cooking and Windows packaging still require a Windows development machine with Unreal Engine 5.8 installed. No Unreal executable is included.
